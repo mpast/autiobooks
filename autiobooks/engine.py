@@ -13,6 +13,7 @@ from kokoro import KPipeline
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 from concurrent.futures import ThreadPoolExecutor
 from PIL import Image, ImageTk
+from .voices_lang import get_language_from_voice
 
 
 SAMPLE_RATE = 24000
@@ -46,8 +47,9 @@ def create_pipeline(lang_code):
         builtins.open = original_open
 
 def gen_audio_segments(text, voice, speed, split_pattern=r'\n+'):
-    # a for american or b for british etc.
-    pipeline = create_pipeline(voice[0])
+    # Get proper language code from voice instead of just first character
+    lang_code = get_language_from_voice(voice)
+    pipeline = create_pipeline(lang_code)
     audio_segments = []
     speed = float(speed)
     for gs, ps, audio in pipeline(text, voice=voice, speed=speed,
