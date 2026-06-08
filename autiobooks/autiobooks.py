@@ -78,7 +78,6 @@ def start_gui():
     voice_label.pack(side=tk.LEFT, pady=5, padx=5)
 
     # add a combo box with voice options
-    # filter out the non-english voices (not working yet)
     voice_combo = ttk.Combobox(
         voice_frame,
         values=voices_emojified,
