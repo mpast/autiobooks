@@ -107,6 +107,6 @@ def deemojify_voice(voice):
     return voice
 
 
-# filter out non-english voices (they're not working yet)
-voices = [x for x in voices_internal if x.startswith("a") or x.startswith("b")]
+# Include English (a, b) and Spanish (e) voices
+voices = [x for x in voices_internal if x.startswith("a") or x.startswith("b") or x.startswith("e")]
 voices_emojified = [emojify_voice(x) for x in voices]
